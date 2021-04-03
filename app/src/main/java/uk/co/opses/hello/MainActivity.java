@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +18,17 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILE_NAME = "Joelanacci.txt";
     private String path;
+    private  Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK)
         {
-            path = DocumentFile.fromTreeUri(this, data.getData()).toString();
+            uri = data.getData();
+            path = uri.getPath();
             count.setText(path);
         }
     }
@@ -129,16 +137,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void printSequenceToFile() throws IOException {
-        FileOutputStream fos = null;
+    public void printSequenceToFile() throws IOException
+    {
+        DocumentFile pickedDir  = DocumentFile.fromTreeUri(this, uri);
+        DocumentFile newFile = pickedDir.createFile("text/plain", FILE_NAME);
+        OutputStream outputStream = this.getContentResolver().openOutputStream(newFile.getUri(), "wa");
 
-        fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-        fos.write(sequence.toString().getBytes());
-        Toast.makeText(this, "Saved to " + getFilesDir() + "-" + FILE_NAME, Toast.LENGTH_LONG).show();
-        if (fos != null)
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+
+        for (Integer number : sequence)
         {
-            fos.close();
+            bw.write(number.toString());
+            bw.newLine();
         }
-
+        bw.close();
     }
 }
