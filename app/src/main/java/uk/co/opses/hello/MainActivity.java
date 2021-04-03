@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         loadPath();
 
         // If no path is present, requests one
-        if (path == null)
+        if (path != null)
         {
-            requestPath();
+            uri = Uri.parse(path);
         }
         else
         {
-            uri = Uri.parse(path);
+            requestPath();
         }
 
         // Assign Views to variables
