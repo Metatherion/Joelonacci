@@ -178,5 +178,7 @@ public class MainActivity extends AppCompatActivity {
         //Closes the output stream
         assert outputStream != null;
         outputStream.close();
+        // Acknowledges to user that the file has been created and sequence printed
+        Toast.makeText(this,"File Saved: " + FILE_NAME, Toast.LENGTH_SHORT).show();
     }
 }

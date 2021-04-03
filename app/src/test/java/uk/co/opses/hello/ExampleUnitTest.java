@@ -11,7 +11,22 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+
+    public void FibonnaciCountZeroTest()
+    {
+        FibonacciAlgorithm.createSequence(0);
+        assertEquals(0, FibonacciAlgorithm.sequence.size());
+    }
+    @Test
+    public void FibonnaciCountOneTest()
+    {
+        FibonacciAlgorithm.createSequence(1);
+        assertEquals(1, FibonacciAlgorithm.sequence.size());
+    }
+    @Test
+    public void FibonnaciCountFiveTest()
+    {
+        FibonacciAlgorithm.createSequence(5);
+        assertEquals(5, FibonacciAlgorithm.sequence.size());
     }
 }
