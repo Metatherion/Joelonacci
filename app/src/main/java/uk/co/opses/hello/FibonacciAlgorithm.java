@@ -12,10 +12,7 @@ public class FibonacciAlgorithm
     public static ArrayList<Integer> createSequence(int count)
     {
         sequence = new ArrayList<Integer>();
-        if (count == 0)
-        {
-            return sequence;
-        }
+        if (count == 0);
         else if (count == 1)
         {
             sequence.add(0);

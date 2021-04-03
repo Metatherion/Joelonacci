@@ -12,49 +12,34 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class FibonacciJUnitTests {
+    int countZero = 0;
+    int countOne = 1;
+    int countFive = 5;
+    int countMinusFive = -5;
+    ArrayList<Integer> arrayListZero = new ArrayList<Integer>();
+    ArrayList<Integer> arrayListOne = new ArrayList<Integer>();
+    ArrayList<Integer> arrayListFive = new ArrayList<Integer>();
+    ArrayList<Integer> arrayListMinusFive = new ArrayList<Integer>();
     @Test
-    public void FibonacciCountZeroTest()
+    public void FibonacciOutputTests()
     {
-        FibonacciAlgorithm.createSequence(0);
-        assertEquals(0, FibonacciAlgorithm.sequence.size());
+        arrayListOne.add(0);
+        arrayListFive.add(0);
+        arrayListFive.add(1);
+        arrayListFive.add(1);
+        arrayListFive.add(2);
+        arrayListFive.add(3);
+        FibonacciSequenceTest(countZero, arrayListZero);
+        FibonacciSequenceTest(countOne, arrayListOne);
+        FibonacciSequenceTest(countFive, arrayListFive);
+        FibonacciSequenceTest(countMinusFive, arrayListMinusFive);
+
     }
-    @Test
-    public void FibonacciCountOneTest()
+
+    public void FibonacciSequenceTest(Integer count, ArrayList<Integer> testArraylist)
     {
-        FibonacciAlgorithm.createSequence(1);
-        assertEquals(1, FibonacciAlgorithm.sequence.size());
-    }
-    @Test
-    public void FibonacciCountFiveTest()
-    {
-        FibonacciAlgorithm.createSequence(5);
-        assertEquals(5, FibonacciAlgorithm.sequence.size());
-    }
-    @Test
-    public void FibonacciSequenceZeroTest()
-    {
-        FibonacciAlgorithm.createSequence(0);
-        ArrayList<Integer> testArraylist = new ArrayList<Integer>();
+        FibonacciAlgorithm.createSequence(count);
         assertEquals(testArraylist, FibonacciAlgorithm.sequence);
     }
-    @Test
-    public void FibonacciSequenceOneTest()
-    {
-        FibonacciAlgorithm.createSequence(1);
-        ArrayList<Integer> testArraylist = new ArrayList<Integer>();
-        testArraylist.add(0);
-        assertEquals(testArraylist, FibonacciAlgorithm.sequence);
-    }
-    @Test
-    public void FibonacciSequenceFiveTest()
-    {
-        FibonacciAlgorithm.createSequence(5);
-        ArrayList<Integer> testArraylist = new ArrayList<Integer>();
-        testArraylist.add(0);
-        testArraylist.add(1);
-        testArraylist.add(1);
-        testArraylist.add(2);
-        testArraylist.add(3);
-        assertEquals(testArraylist, FibonacciAlgorithm.sequence);
-    }
+
 }
