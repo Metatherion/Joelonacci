@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         // Checks for preset file path in shared preferences
         loadPath();
 
-        // If no path is present, requests one
+        // If path has been loaded from shared preferences then create a uri to be used in file creation
         if (path != null)
         {
             uri = Uri.parse(path);
         }
+        // If there is no saved path, request the user to select one
         else
         {
             requestPath();
